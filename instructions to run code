@@ -2,7 +2,7 @@
 flutter pub get 
 cd server
 pip install Flask Flask-SQLAlchemy Flask-CORS Flask-Bcrypt
-# Replace the username, password and database name in config on line 12 with your particular username, password and database name.
+# Replace the username, password and database name in config in app.py on line 12 with your particular username, password and database name.
 python .\app.py
 
 # You're all set to run the code
