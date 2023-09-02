@@ -1,0 +1,10 @@
+flutter pub get 
+cd server
+pip install Flask Flask-SQLAlchemy Flask-CORS Flask-Bcrypt
+# Replace the username, password and database name in config on line 12 with your particular username, password and database name.
+python .\app.py
+
+# You're all set to run the code
+flutter run
+
+# I have assumed mysql is installed in your system else you will have to install mysql in your system and then carry on from line 3

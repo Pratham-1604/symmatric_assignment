@@ -1,9 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously
-import 'dart:convert';
-
+// ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import 'magic_button.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -35,7 +35,7 @@ class _LoginState extends State<Login> {
 
         // Optionally show a success message to the user
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('User registered successfully!'),
           ),
         );
@@ -52,7 +52,7 @@ class _LoginState extends State<Login> {
     } catch (error) {
       debugPrint("Failed to connect to the backend.");
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to connect to the backend.')));
+          const SnackBar(content: Text('Failed to connect to the backend.')));
     }
   }
 
@@ -72,14 +72,14 @@ class _LoginState extends State<Login> {
 
         // Optionally show a success message to the user
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Logged in successfully!'),
           ),
         );
       } else {
         final responseBody = json.decode(response.body);
         debugPrint(responseBody['message']);
-        // Show error message to the user
+        // Shows error message
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(responseBody['message']),
@@ -89,7 +89,7 @@ class _LoginState extends State<Login> {
     } catch (error) {
       debugPrint("Failed to connect to the backend.");
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to connect to the backend.')));
+          const SnackBar(content: Text('Failed to connect to the backend.')));
     }
   }
 
@@ -108,7 +108,7 @@ class _LoginState extends State<Login> {
       body: SingleChildScrollView(
         child: Container(
           height: size.height * 0.9,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
             // border: Border.all(color: Colors.black),
           ),
@@ -128,7 +128,7 @@ class _LoginState extends State<Login> {
                   Text(
                     !isLogin ? 'Sign Up' : 'Login',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: Color.fromARGB(255, 136, 23, 60),
@@ -148,15 +148,14 @@ class _LoginState extends State<Login> {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
                         children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
                             child: Icon(Icons.mail_outline_rounded),
                           ),
                           Expanded(
                             child: TextField(
                               controller: emailController,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 hintText: "Email",
                                 hintStyle: TextStyle(
                                   fontSize: 15,
@@ -184,16 +183,15 @@ class _LoginState extends State<Login> {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
                         children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
                             child: Icon(Icons.lock_outline),
                           ),
                           Expanded(
                             child: TextField(
                               controller: passwordController,
                               keyboardType: TextInputType.visiblePassword,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 hintText: "Password",
                                 hintStyle: TextStyle(
                                   fontSize: 15,
@@ -205,7 +203,7 @@ class _LoginState extends State<Login> {
                               obscureText: !showPassword,
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           IconButton(
                             onPressed: () {
                               setState(() {
@@ -247,7 +245,7 @@ class _LoginState extends State<Login> {
                         !isLogin
                             ? 'Don\'t have an account?'
                             : 'Already have an account?',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18,
                           fontFamily: 'Times New Roman',
                         ),
@@ -303,76 +301,6 @@ class _LoginState extends State<Login> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class MagicButton extends StatelessWidget {
-  const MagicButton({
-    Key? key,
-    required this.password,
-    required this.email,
-    required this.text,
-  }) : super(key: key);
-
-  final String email, password, text;
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Container(
-      width: size.width * 0.95,
-      height: 60,
-      alignment: Alignment.center,
-      child: Stack(
-        children: [
-          Positioned(
-            top: 12,
-            left: 18,
-            child: Container(
-              width: size.width * 0.88,
-              height: 48,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.pinkAccent[700]!,
-                  width: 1.25,
-                ),
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 04,
-            left: 8,
-            child: Container(
-              alignment: Alignment.center,
-              width: size.width * 0.88,
-              height: 45,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Colors.deepOrange[400]!,
-                    Colors.pink.shade600,
-                  ],
-                ),
-              ),
-              child: Text(
-                text,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w800,
-                  fontFamily: 'Times New Roman',
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
