@@ -1,4 +1,4 @@
-# In your terminals in the main folder
+# In your terminal in the main folder
 flutter pub get 
 cd server
 pip install Flask Flask-SQLAlchemy Flask-CORS Flask-Bcrypt
